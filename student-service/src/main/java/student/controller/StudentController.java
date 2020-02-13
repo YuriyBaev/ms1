@@ -2,18 +2,21 @@ package student.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 import student.model.Student;
 import student.model.dto.LessonDto;
 import student.service.StudentService;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/students")
@@ -45,8 +48,23 @@ public class StudentController
     @GetMapping(value = "/lessonsByStudentNumber/{studentNumber}")
     public ResponseEntity<LessonDto> getLessonsByStudentNumber(@PathVariable("studentNumber") Long studentNumber)
     {
-        String url = "http://localhost:8083/lessons/byStudentNumber/" + studentNumber;
-        return restTemplate.exchange(url, HttpMethod.GET, null, LessonDto.class);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
+
+        Map<String, Object> uriVariables = new HashMap<>();
+        uriVariables.put("studentNumber", studentNumber);
+
+        String path = UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host("localhost:8083")
+                .path("/lessons/byStudentNumber/{studentNumber}")
+                .buildAndExpand(uriVariables)
+                .toUriString();
+        System.out.println("path: "+path);
+
+        return restTemplate.exchange(path, HttpMethod.GET, httpEntity, LessonDto.class);
     }
 
 }
