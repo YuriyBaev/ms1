@@ -9,4 +9,6 @@ public interface LessonService
     List<Lesson> findAll();
 
     Lesson findLessonByStudentNumber(long studentNumber);
+
+    Lesson saveOrUpdateLesson(Lesson lesson);
 }

@@ -30,4 +30,10 @@ public class LessonServiceImpl implements LessonService
     {
         return lessonRepository.findLessonByStudentNumber(studentNumber);
     }
+
+    @Override
+    public Lesson saveOrUpdateLesson(Lesson lesson)
+    {
+        return lessonRepository.save(lesson);
+    }
 }

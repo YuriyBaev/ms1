@@ -3,10 +3,7 @@ package lesson.controller;
 import lesson.model.Lesson;
 import lesson.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,10 +25,16 @@ public class LessonController
         return lessonService.findAll();
     }
 
-    @GetMapping(value= "/byStudentNumber/{studentNumber}")
+    @GetMapping(value = "/byStudentNumber/{studentNumber}")
     public Lesson getLessonsByStudentNumber(@PathVariable("studentNumber") Long studentNumber)
     {
         return lessonService.findLessonByStudentNumber(studentNumber);
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Lesson addOrUpdateLesson(@RequestBody final Lesson lesson)
+    {
+        return lessonService.saveOrUpdateLesson(lesson);
     }
 
 }
