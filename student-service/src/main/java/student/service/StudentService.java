@@ -16,5 +16,5 @@ public interface StudentService
 
     Student saveOrUpdateStudent(Student student);
 
-    void deleteStudentById(String id);
+    void deleteStudentById(long id);
 }

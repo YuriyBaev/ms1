@@ -11,4 +11,7 @@ public interface LessonService
     Lesson findLessonByStudentNumber(long studentNumber);
 
     Lesson saveOrUpdateLesson(Lesson lesson);
+
+    void deleteLesson(long studentNumber);
+
 }

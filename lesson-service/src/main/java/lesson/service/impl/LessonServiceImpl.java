@@ -36,4 +36,10 @@ public class LessonServiceImpl implements LessonService
     {
         return lessonRepository.save(lesson);
     }
+
+    @Override
+    public void deleteLesson(long studentNumber)
+    {
+        lessonRepository.deleteById(String.valueOf(studentNumber));
+    }
 }
