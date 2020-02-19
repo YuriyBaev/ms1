@@ -16,11 +16,9 @@ public class MessageConsumer
 
     @JmsListener(destination = "test-queue")
     public void listener(String message) throws Exception {
-        LOG.debug("Message received {} ", message);
         System.out.println("Message received: "+ message);
 
         if(Action.DELETED.getValue().equals(message.substring(0, message.indexOf('#')))){
-            System.out.println("inside of deletion lesson: "+message.substring(message.indexOf('#')+1));
             lessonService.deleteLesson(message.substring(message.indexOf('#')+1));
         }
     }
