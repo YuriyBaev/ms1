@@ -48,8 +48,8 @@ class LessonControllerTest
     @BeforeEach
     void setUp()
     {
-        lesson1 = Lesson.builder().id("1").studentNumber(12L).courseList(Arrays.asList("Math", "English")).build();
-        lesson2 = Lesson.builder().id("2").studentNumber(22L).courseList(Arrays.asList("Physic", "Russian")).build();
+        lesson1 = Lesson.builder().id("1").studentNumber("12").courseList(Arrays.asList("Math", "English")).build();
+        lesson2 = Lesson.builder().id("2").studentNumber("22").courseList(Arrays.asList("Physic", "Russian")).build();
     }
 
     @Test

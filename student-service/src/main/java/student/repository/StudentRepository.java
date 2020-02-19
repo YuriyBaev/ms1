@@ -9,7 +9,7 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "college_students", path = "students")
 public interface StudentRepository extends MongoRepository<Student, String>
 {
-    Student findByStudentNumber(long studentNumber);
+    Student findByStudentNumber(String studentNumber);
 
     Student findByEmail(String email);
 

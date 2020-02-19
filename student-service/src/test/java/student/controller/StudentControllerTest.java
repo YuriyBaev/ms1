@@ -56,13 +56,13 @@ class StudentControllerTest
     {
         student1 = Student.builder()
                 .id("1")
-                .studentNumber(11L)
+                .studentNumber("11")
                 .name("Sam")
                 .gpa(2.1f).build();
 
         student2 = Student.builder()
                 .id("2")
-                .studentNumber(12L)
+                .studentNumber("12")
                 .name("Bob")
                 .gpa(2.2f).build();
 
@@ -92,7 +92,7 @@ class StudentControllerTest
 
     @Test void getLessonsByStudentNumber() throws Exception
     {
-        LessonDto lessonDto = new LessonDto("1", 12L, Arrays.asList("English"));
+        LessonDto lessonDto = new LessonDto("1", "12", Arrays.asList("English"));
         mockServer.expect(ExpectedCount.once(),
                 requestTo(new URI("http://localhost:8083/lessons/byStudentNumber/12")))
                 .andExpect(method(HttpMethod.GET))

@@ -38,8 +38,7 @@ public class LessonController
     }
 
     @GetMapping(value = "/byStudentNumber/{studentNumber}")
-    public Lesson getLessonsByStudentNumber(@PathVariable("studentNumber") Long studentNumber)
-    {
+    public Lesson getLessonsByStudentNumber(@PathVariable("studentNumber") String studentNumber) throws Exception {
         return lessonService.findLessonByStudentNumber(studentNumber);
     }
 

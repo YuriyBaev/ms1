@@ -17,7 +17,7 @@ public class LessonDto
 {
     private String id;
 
-    private long studentNumber;
+    private String studentNumber;
 
     private List<String> courseList;
 

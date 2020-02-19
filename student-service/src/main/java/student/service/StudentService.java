@@ -8,7 +8,7 @@ public interface StudentService
 {
     List<Student> findAll();
 
-    Student findByStudentNumber(long studentNumber);
+    Student findByStudentNumber(String studentNumber);
 
     Student findByEmail(String email);
 
@@ -16,5 +16,7 @@ public interface StudentService
 
     Student saveOrUpdateStudent(Student student);
 
-    void deleteStudentById(long id);
+    void deleteStudentById(String id);
+
+    void deleteStudent(Student student);
 }

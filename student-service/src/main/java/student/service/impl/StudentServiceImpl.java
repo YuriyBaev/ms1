@@ -26,7 +26,7 @@ public class StudentServiceImpl implements StudentService
     }
 
     @Override
-    public Student findByStudentNumber(long studentNumber)
+    public Student findByStudentNumber(String studentNumber)
     {
         return studentRepository.findByStudentNumber(studentNumber);
     }
@@ -50,9 +50,12 @@ public class StudentServiceImpl implements StudentService
     }
 
     @Override
-    public void deleteStudentById(long id)
-    {
-        studentRepository.deleteById(String.valueOf(id));
+    public void deleteStudentById(String id) {
+        studentRepository.deleteById(id);
+    }
 
+    @Override
+    public void deleteStudent(Student student) {
+        studentRepository.delete(student);
     }
 }

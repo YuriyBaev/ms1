@@ -52,13 +52,13 @@ public class StudentController
     }
 
     @GetMapping(value = "/byStudentNumber/{studentNumber}")
-    public Student getStudentByStudentNumber(@PathVariable("studentNumber") Long studentNumber)
+    public Student getStudentByStudentNumber(@PathVariable("studentNumber") String studentNumber)
     {
         return studentService.findByStudentNumber(studentNumber);
     }
 
     @GetMapping(value = "/lessonsByStudentNumber/{studentNumber}")
-    public ResponseEntity<LessonDto> getLessonsByStudentNumber(@PathVariable("studentNumber") Long studentNumber) throws Exception
+    public ResponseEntity<LessonDto> getLessonsByStudentNumber(@PathVariable("studentNumber") String studentNumber) throws Exception
     {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -85,15 +85,15 @@ public class StudentController
     }
 
     @RequestMapping(value = "/delete/{studentNumber}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteStudent(@PathVariable("studentNumber") final long studentNumber) throws Exception
+    public ResponseEntity<String> deleteStudent(@PathVariable("studentNumber") final String studentNumber) throws Exception
     {
         Student student = studentService.findByStudentNumber(studentNumber);
         if (student == null)
             throw new Exception(String.format("Student with number %s not found", studentNumber));
 
-        studentService.deleteStudentById(studentNumber);
-        jmsTemplate.convertAndSend(queue, Action.DELETED.getValue()+"#"+studentNumber);
-        return new ResponseEntity<>("", HttpStatus.OK);
+        studentService.deleteStudent(student);
+        jmsTemplate.convertAndSend(queue, Action.DELETED.getValue() + "#" + studentNumber);
+        return new ResponseEntity<>("Oki-doki", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/add/{message}", method = RequestMethod.POST)

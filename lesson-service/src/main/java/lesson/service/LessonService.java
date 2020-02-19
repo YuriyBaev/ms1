@@ -8,10 +8,11 @@ public interface LessonService
 {
     List<Lesson> findAll();
 
-    Lesson findLessonByStudentNumber(long studentNumber);
+    Lesson findLessonByStudentNumber(String studentNumber) throws Exception;
 
     Lesson saveOrUpdateLesson(Lesson lesson);
 
-    void deleteLesson(long studentNumber);
+    void deleteLesson(String studentNumber) throws Exception;
+
 
 }

@@ -1,5 +1,6 @@
 package lesson.listener;
 
+import lesson.enums.Action;
 import lesson.service.LessonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,13 @@ public class MessageConsumer
     LessonService lessonService;
 
     @JmsListener(destination = "test-queue")
-    public void listener(String message)
-    {
+    public void listener(String message) throws Exception {
         LOG.debug("Message received {} ", message);
         System.out.println("Message received: "+ message);
-       /* if(Action.DELETED.getValue().equals(message)){
-            lessonService.
-        }*/
+
+        if(Action.DELETED.getValue().equals(message.substring(0, message.indexOf('#')))){
+            System.out.println("inside of deletion lesson: "+message.substring(message.indexOf('#')+1));
+            lessonService.deleteLesson(message.substring(message.indexOf('#')+1));
+        }
     }
 }
